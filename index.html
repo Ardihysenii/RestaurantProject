@@ -667,7 +667,8 @@
 
   window.addEventListener('touchmove', (e) => {
     const touchDelta = touchStartY - e.touches[0].clientY;
-    const touchMultiplier = window.innerWidth <= 768 ? 2.5 : 2;
+    // Increased Multiplier to 4.0 for snappy mobile responsiveness
+    const touchMultiplier = window.innerWidth <= 768 ? 4.0 : 2;
     targetY -= (touchDelta * scrollSpeedMultiplier * touchMultiplier);
     touchStartY = e.touches[0].clientY;
     clampTarget();
@@ -687,14 +688,12 @@
     const panelHeight = (window.innerHeight * 0.75) - headerHeight;
     const section2Height = window.innerHeight * 2.2;
 
-    // Detect if we have reached the parallax/beige transition point
     const hasReachedParallax = currentY <= -panelHeight;
 
-    // ADJUSTED: Dynamic easing for mobile
-    // When we hit the beige transition point, ease becomes faster (0.12) to mimic normal scroll.
+    // Increased Easing to 0.15 for mobile so it catches up instantly without lag
     let currentEase = ease;
     if (window.innerWidth <= 768) {
-      currentEase = hasReachedParallax ? 0.12 : 0.08;
+      currentEase = hasReachedParallax ? 0.15 : 0.12;
     }
 
     currentY += (targetY - currentY) * currentEase;
