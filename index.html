@@ -174,7 +174,6 @@
       font-weight: 400;
       letter-spacing: 2px;
       color: var(--text-dark);
-      /* Note: The following properties in your provided code were inside h1 but belonged elsewhere; keeping as requested */
       grid-template-columns: 1fr 1fr 1fr;
       align-items: center;
       padding: 0 40px;
@@ -437,29 +436,73 @@
 
     /* --- REVISED Mobile Media Queries --- */
     @media (max-width: 768px) {
+      /* Enable Native Scrolling & Remove JS Hijacking visually */
       body, html {
         background-color: var(--bg-color);
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: auto !important;
       }
 
+      /* Lock Background / Reset Dynamic Inline JS Styles via !important */
+      .fixed-background {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+      }
+
+      /* Stack panels naturally in document flow - Extended panel length downwards */
+      .foreground-panel {
+        position: relative !important;
+        top: 0 !important;
+        margin-top: 100px !important; /* Space for the sticky header */
+        height: auto !important;
+        min-height: calc(65vh - 100px) !important; /* Extended length to cover more of the picture below */
+        margin-bottom: 50vh !important; /* Reveals background below */
+        transform: none !important;
+        opacity: 1 !important; /* Prevent JS fadeout */
+        z-index: 2 !important;
+      }
+
+      #section2 {
+        padding: 80px 20px 110px 20px !important;
+        height: auto !important;
+        position: relative !important;
+        top: 0 !important;
+        transform: none !important;
+        z-index: 3 !important;
+      }
+
+      /* Disable Glass Effect toggles on mobile */
+      header.glass-active {
+        background-color: var(--bg-color) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+      }
+
+      .book-table-btn.glass-active {
+        background-color: var(--bg-color) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: 1px solid transparent !important;
+        color: var(--text-dark) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+      }
+
+      /* Layout Structure Resets */
       .header-inner {
         grid-template-columns: 1fr auto;
         padding: 0 20px;
       }
       .header-left { display: none; }
-
       .header-center { justify-self: start; text-align: left; }
       .header-center p { text-align: left; }
-
       .menu-text { width: 65px; opacity: 1; margin-right: 15px; }
 
-      .foreground-panel {
-        top: 100px;
-        height: auto;
-        min-height: 40vh;
-      }
-
       .hero-title { font-size: 14vw; }
-
       .subtext {
         align-self: flex-start;
         margin-right: 0;
@@ -467,50 +510,75 @@
         max-width: 100%;
         padding-bottom: 40px;
       }
-
       main {
         padding: 0 30px;
         padding-top: 20px;
         justify-content: flex-start;
       }
-
-      .book-table-btn {
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        bottom: 30px;
-        width: auto;
-        height: 60px;
-        justify-content: center;
-      }
-
-      #section2 {
-        padding: 110px 20px 110px 20px;
-        height: auto;
-        position: fixed;
-      }
-
       .sec2-title { font-size: 10vw; }
       .sec2-header-wrap { flex-direction: column; gap: 5px; }
 
+      /* Lock Button inside the fixed background so it stays floating */
+      .book-table-btn {
+        position: absolute !important;
+        left: 20px !important;
+        right: 20px !important;
+        bottom: 30px !important;
+        width: auto !important;
+        height: 60px !important;
+        justify-content: center;
+        transform: none !important;
+      }
+
+      /* --- Image Configuration for Mobile --- */
       .sec2-images-container {
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-        height: auto;
-        margin-top: 25px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+        height: auto !important;
+        margin-top: 40px !important;
       }
 
       .img-wrapper {
         position: relative !important;
-        width: 100% !important;
-        height: 400px !important;
         left: auto !important;
         top: auto !important;
         right: auto !important;
         bottom: auto !important;
       }
-      .img-wrapper.bottom-texture { display: none; }
+
+      /* Hide the 5th image completely */
+      .img-wrapper.extra-two {
+        display: none !important;
+      }
+
+      /* BLOCK 1: SMALL -> BIG -> CAPTION -> <br> */
+      .img-wrapper.pastry {
+        width: 60% !important;
+        height: 280px !important;
+        align-self: flex-start !important;
+      }
+
+      .img-wrapper.seafood {
+        width: 100% !important;
+        height: 380px !important;
+        align-self: center !important;
+        margin-bottom: 40px !important; /* Acts as the <br> separation before the next sequence starts */
+      }
+
+      /* BLOCK 2: SMALL -> BIG -> CAPTION */
+      .img-wrapper.bottom-texture {
+        display: block !important;
+        width: 60% !important;
+        height: 280px !important;
+        align-self: flex-start !important;
+      }
+
+      .img-wrapper.extra-one {
+        width: 100% !important;
+        height: 380px !important;
+        align-self: center !important;
+      }
     }
 
   </style>
@@ -572,6 +640,7 @@
       <h2 class="sec2-title">FUSION OF TRADITION<br>AND CREATIVITY</h2>
     </div>
     <div class="sec2-images-container">
+
       <div class="img-wrapper pastry">
         <img src="/img/Drink Section2.jpg" alt="Pastry">
       </div>
