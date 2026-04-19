@@ -6,7 +6,7 @@
   <title>Viseversa Bistro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="google-site-verification" content="google04c850c6478b1f5a" />
 
@@ -80,14 +80,14 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-image: url(img/80c47f5f-7c69-49e6-b1c4-6226e4c3cfcb-Picsart-AiImageEnhancer.jpg);
+      background-image: url(img/home-Picsart-AiImageEnhancer.jpg);
       background-size: cover;
       background-position: center;
       z-index: 1;
       will-change: transform;
     }
 
-    /* --- Updated Button with Glass logic --- */
+    /* --- Updated Button with Cormorant Font --- */
     .book-table-btn {
       position: absolute;
       bottom: 40px;
@@ -95,9 +95,11 @@
       background-color: var(--bg-color);
       border: 1px solid transparent;
       padding: 15px 30px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
+      /* Updated to match Luxury Font style */
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 2px;
       color: var(--text-dark);
       cursor: pointer;
       display: flex;
@@ -168,17 +170,15 @@
       margin: 0 10px;
     }
 
+    /* Updated Title Font */
     .header-center h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
       letter-spacing: 2px;
       color: var(--text-dark);
-      grid-template-columns: 1fr 1fr 1fr;
-      align-items: center;
-      padding: 0 40px;
+      text-transform: uppercase;
     }
-
 
     .header-center p {
       font-size: 0.55rem;
@@ -262,9 +262,11 @@
       text-align: center;
     }
 
+    /* Updated Overlay Font */
     .overlay-content a {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 3.5rem;
+      font-weight: 300;
       color: var(--text-dark);
       text-decoration: none;
       letter-spacing: 2px;
@@ -299,13 +301,15 @@
       padding-bottom: 80px;
     }
 
+    /* Updated Hero Title Font */
     .hero-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 8.5vw;
-      font-weight: 400;
+      font-weight: 300;
       line-height: 0.9;
       color: var(--text-dark);
       letter-spacing: -2px;
+      text-transform: uppercase;
     }
 
     .hero-title .highlight {
@@ -331,7 +335,7 @@
       top: 100vh;
       left: 0;
       width: 100vw;
-      height: 220vh; /* EXTENDED HEIGHT */
+      height: 220vh;
       background-color: var(--bg-color);
       z-index: 2;
       will-change: transform;
@@ -359,10 +363,11 @@
       font-weight: 500;
     }
 
+    /* Updated Section 2 Title Font */
     .sec2-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 5.5vw;
-      font-weight: 400;
+      font-weight: 300;
       line-height: 1;
       color: var(--text-dark);
       text-transform: uppercase;
@@ -387,7 +392,6 @@
       object-fit: cover;
     }
 
-    /* Caption style: soft black and really small */
     .img-caption {
       font-size: 0.65rem;
       color: rgba(0, 0, 0, 0.4);
@@ -418,7 +422,6 @@
       height: 250px;
     }
 
-    /* New Image Slot 1 (Bigger) */
     .img-wrapper.extra-one {
       top: 55%;
       right: 10%;
@@ -426,7 +429,6 @@
       height: 700px;
     }
 
-    /* New Image Slot 2 */
     .img-wrapper.extra-two {
       top: 85%;
       left: 15%;
@@ -434,9 +436,12 @@
       height: 450px;
     }
 
+    .mobile-extra-caption {
+      display: none;
+    }
+
     /* --- REVISED Mobile Media Queries --- */
     @media (max-width: 768px) {
-      /* Enable Native Scrolling & Remove JS Hijacking visually */
       body, html {
         background-color: var(--bg-color);
         overflow-y: auto !important;
@@ -444,37 +449,36 @@
         height: auto !important;
       }
 
-      /* Lock Background / Reset Dynamic Inline JS Styles via !important */
       .fixed-background {
-        position: fixed !important;
+        position: absolute !important;
         top: 0 !important;
         left: 0 !important;
+        height: 100vh !important;
         transform: none !important;
       }
 
-      /* Stack panels naturally in document flow - Extended panel length downwards */
       .foreground-panel {
         position: relative !important;
         top: 0 !important;
-        margin-top: 100px !important; /* Space for the sticky header */
+        margin-top: 100px !important;
         height: auto !important;
-        min-height: calc(65vh - 100px) !important; /* Extended length to cover more of the picture below */
-        margin-bottom: 50vh !important; /* Reveals background below */
+        min-height: 40vh !important;
+        margin-bottom: 35vh !important;
         transform: none !important;
-        opacity: 1 !important; /* Prevent JS fadeout */
+        opacity: 1 !important;
         z-index: 2 !important;
       }
 
       #section2 {
-        padding: 80px 20px 110px 20px !important;
+        padding: 30px 20px 110px 20px !important;
         height: auto !important;
         position: relative !important;
         top: 0 !important;
         transform: none !important;
         z-index: 3 !important;
+        background-color: var(--bg-color) !important;
       }
 
-      /* Disable Glass Effect toggles on mobile */
       header.glass-active {
         background-color: var(--bg-color) !important;
         backdrop-filter: none !important;
@@ -492,7 +496,6 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
       }
 
-      /* Layout Structure Resets */
       .header-inner {
         grid-template-columns: 1fr auto;
         padding: 0 20px;
@@ -506,37 +509,40 @@
       .subtext {
         align-self: flex-start;
         margin-right: 0;
-        margin-top: 20px;
+        margin-top: 45px;
         max-width: 100%;
-        padding-bottom: 40px;
+        padding-bottom: 20px;
       }
       main {
         padding: 0 30px;
-        padding-top: 20px;
+        padding-top: 30px;
         justify-content: flex-start;
       }
       .sec2-title { font-size: 10vw; }
       .sec2-header-wrap { flex-direction: column; gap: 5px; }
 
-      /* Lock Button inside the fixed background so it stays floating */
       .book-table-btn {
-        position: absolute !important;
+        position: fixed !important;
         left: 20px !important;
         right: 20px !important;
         bottom: 30px !important;
         width: auto !important;
-        height: 60px !important;
+        height: 50px !important;
         justify-content: center;
         transform: none !important;
+        z-index: 100 !important;
       }
 
-      /* --- Image Configuration for Mobile --- */
+      .mobile-extra-caption {
+        display: inline;
+      }
+
       .sec2-images-container {
         display: flex !important;
         flex-direction: column !important;
-        gap: 30px !important;
+        gap: 20px !important;
         height: auto !important;
-        margin-top: 40px !important;
+        margin-top: 30px !important;
       }
 
       .img-wrapper {
@@ -547,12 +553,10 @@
         bottom: auto !important;
       }
 
-      /* Hide the 5th image completely */
       .img-wrapper.extra-two {
         display: none !important;
       }
 
-      /* BLOCK 1: SMALL -> BIG -> CAPTION -> <br> */
       .img-wrapper.pastry {
         width: 60% !important;
         height: 280px !important;
@@ -561,12 +565,11 @@
 
       .img-wrapper.seafood {
         width: 100% !important;
-        height: 380px !important;
+        height: 420px !important;
         align-self: center !important;
-        margin-bottom: 40px !important; /* Acts as the <br> separation before the next sequence starts */
+        margin-bottom: 120px !important;
       }
 
-      /* BLOCK 2: SMALL -> BIG -> CAPTION */
       .img-wrapper.bottom-texture {
         display: block !important;
         width: 60% !important;
@@ -576,8 +579,9 @@
 
       .img-wrapper.extra-one {
         width: 100% !important;
-        height: 380px !important;
+        height: 420px !important;
         align-self: center !important;
+        margin-bottom: 40px !important;
       }
     }
 
@@ -647,7 +651,10 @@
 
       <div class="img-wrapper seafood">
         <img src="/img/FoodSection2.jpg" alt="Seafood">
-        <div class="img-caption">Freshly sourced ingredients from the local Portuguese coast.</div>
+        <div class="img-caption">
+          Freshly sourced ingredients from the local Portuguese coast.
+          <span class="mobile-extra-caption"> Carefully selected to bring you the authentic taste of the ocean directly to your table, ensuring every bite is memorable.</span>
+        </div>
       </div>
 
       <div class="img-wrapper bottom-texture">
@@ -656,7 +663,10 @@
 
       <div class="img-wrapper extra-one">
         <img src="/img/RestaurantEntry.jpg" alt="Interior">
-        <div class="img-caption">An atmosphere designed for comfort and creative dialogue.</div>
+        <div class="img-caption">
+          An atmosphere designed for comfort and creative dialogue.
+          <span class="mobile-extra-caption"> Whether you are here for a quick bite or a long evening of fine dining, our space perfectly adapts to your every need.</span>
+        </div>
       </div>
 
       <div class="img-wrapper extra-two">
@@ -736,7 +746,6 @@
 
   window.addEventListener('touchmove', (e) => {
     const touchDelta = touchStartY - e.touches[0].clientY;
-    // Increased Multiplier to 4.0 for snappy mobile responsiveness
     const touchMultiplier = window.innerWidth <= 768 ? 4.0 : 2;
     targetY -= (touchDelta * scrollSpeedMultiplier * touchMultiplier);
     touchStartY = e.touches[0].clientY;
@@ -759,7 +768,6 @@
 
     const hasReachedParallax = currentY <= -panelHeight;
 
-    // Increased Easing to 0.15 for mobile so it catches up instantly without lag
     let currentEase = ease;
     if (window.innerWidth <= 768) {
       currentEase = hasReachedParallax ? 0.15 : 0.12;
