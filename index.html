@@ -437,7 +437,6 @@
 
     /* --- REVISED Mobile Media Queries --- */
     @media (max-width: 768px) {
-      /* Added background color fix so black bottom doesn't show */
       body, html {
         background-color: var(--bg-color);
       }
@@ -448,7 +447,6 @@
       }
       .header-left { display: none; }
 
-      /* MODIFIED: Changed justify-self from center to start and text-align to left */
       .header-center { justify-self: start; text-align: left; }
       .header-center p { text-align: left; }
 
@@ -610,48 +608,35 @@
   const fixedBg = document.getElementById('fixedBg');
   const section2 = document.getElementById('section2');
 
-  // --- LIVE CLOCK LOGIC ---
   function updateClock() {
     const timeEl = document.getElementById('liveTime');
     const statusEl = document.getElementById('liveStatus');
-
     const now = new Date();
-
-    // Format the time string for display
     const timeStr = now.toLocaleTimeString('en-US', {
       timeZone: 'Europe/Berlin',
       hour: 'numeric',
       minute: '2-digit',
       hour12: true
     });
-
-    // Get the hour specifically for the Open/Closed logic
     const currentHour = parseInt(now.toLocaleTimeString('en-GB', {
       timeZone: 'Europe/Berlin',
       hour: '2-digit',
       hour12: false
     }));
-
-    // Logic:
-    // OPEN if the hour is BETWEEN 8 (8 AM) and 23 (11 PM)
-    // CLOSED if it is 11 PM or later (>= 23) OR before 8 AM (< 8)
     if (currentHour >= 23 || currentHour < 8) {
       statusEl.textContent = 'CLOSED';
     } else {
       statusEl.textContent = 'OPEN';
     }
-
     timeEl.textContent = timeStr;
   }
 
-  // Keep these at the bottom of your script
   updateClock();
   setInterval(updateClock, 60000);
 
   menuBtn.addEventListener('click', () => {
     const isOpening = !menuOverlay.classList.contains('open');
     menuBtn.classList.remove('active');
-
     setTimeout(() => {
       if (isOpening) {
         menuOverlay.classList.add('open');
@@ -667,8 +652,6 @@
 
   let currentY = 0;
   let targetY = 0;
-
-  // Changed ease to 'let' so we can modify it for mobile devices later in the script
   let ease = 0.04;
   const scrollSpeedMultiplier = 0.6;
 
@@ -684,10 +667,7 @@
 
   window.addEventListener('touchmove', (e) => {
     const touchDelta = touchStartY - e.touches[0].clientY;
-
-    // Checks if on mobile, applies a slightly higher multiplier to make the drag faster
-    const touchMultiplier = window.innerWidth <= 768 ? 3.0 : 2;
-
+    const touchMultiplier = window.innerWidth <= 768 ? 2.5 : 2;
     targetY -= (touchDelta * scrollSpeedMultiplier * touchMultiplier);
     touchStartY = e.touches[0].clientY;
     clampTarget();
@@ -698,19 +678,26 @@
     const panelHeight = (window.innerHeight * 0.75) - headerHeight;
     const section2Height = window.innerHeight * 2.2;
     const maxScroll = panelHeight + section2Height;
-
     if (targetY > 0) targetY = 0;
     if (targetY < -maxScroll) targetY = -maxScroll;
   }
 
   function animateScroll() {
-    // If on mobile, the easing jumps to 0.09 so it catches up faster and feels smoother
-    const currentEase = window.innerWidth <= 768 ? 0.09 : ease;
-    currentY += (targetY - currentY) * currentEase;
-
     const headerHeight = 100;
     const panelHeight = (window.innerHeight * 0.75) - headerHeight;
     const section2Height = window.innerHeight * 2.2;
+
+    // Detect if we have reached the parallax/beige transition point
+    const hasReachedParallax = currentY <= -panelHeight;
+
+    // ADJUSTED: Dynamic easing for mobile
+    // When we hit the beige transition point, ease becomes faster (0.12) to mimic normal scroll.
+    let currentEase = ease;
+    if (window.innerWidth <= 768) {
+      currentEase = hasReachedParallax ? 0.12 : 0.08;
+    }
+
+    currentY += (targetY - currentY) * currentEase;
 
     let boundedPanelY = currentY;
     if (currentY < -panelHeight) boundedPanelY = -panelHeight;
@@ -751,7 +738,6 @@
     const panelHeight = (window.innerHeight * 0.75) - headerHeight;
     const section2Height = window.innerHeight * 2.2;
     const maxScroll = panelHeight + section2Height;
-
     if (targetY < -maxScroll) {
       targetY = -maxScroll;
     }
