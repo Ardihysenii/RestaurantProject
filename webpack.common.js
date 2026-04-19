@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-    filename: './js/app.js',
+    // Remove the './' at the beginning
+    filename: 'js/app.js',
   },
 };
