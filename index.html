@@ -437,6 +437,11 @@
 
     /* --- REVISED Mobile Media Queries --- */
     @media (max-width: 768px) {
+      /* Added background color fix so black bottom doesn't show */
+      body, html {
+        background-color: var(--bg-color);
+      }
+
       .header-inner {
         grid-template-columns: 1fr auto;
         padding: 0 20px;
@@ -662,7 +667,9 @@
 
   let currentY = 0;
   let targetY = 0;
-  const ease = 0.04;
+
+  // Changed ease to 'let' so we can modify it for mobile devices later in the script
+  let ease = 0.04;
   const scrollSpeedMultiplier = 0.6;
 
   window.addEventListener('wheel', (e) => {
@@ -677,7 +684,11 @@
 
   window.addEventListener('touchmove', (e) => {
     const touchDelta = touchStartY - e.touches[0].clientY;
-    targetY -= (touchDelta * scrollSpeedMultiplier * 2);
+
+    // Checks if on mobile, applies a slightly higher multiplier to make the drag faster
+    const touchMultiplier = window.innerWidth <= 768 ? 3.0 : 2;
+
+    targetY -= (touchDelta * scrollSpeedMultiplier * touchMultiplier);
     touchStartY = e.touches[0].clientY;
     clampTarget();
   }, { passive: true });
@@ -693,7 +704,9 @@
   }
 
   function animateScroll() {
-    currentY += (targetY - currentY) * ease;
+    // If on mobile, the easing jumps to 0.09 so it catches up faster and feels smoother
+    const currentEase = window.innerWidth <= 768 ? 0.09 : ease;
+    currentY += (targetY - currentY) * currentEase;
 
     const headerHeight = 100;
     const panelHeight = (window.innerHeight * 0.75) - headerHeight;
