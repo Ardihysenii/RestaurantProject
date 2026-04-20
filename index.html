@@ -6,7 +6,7 @@
   <title>Viseversa Bistro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="google-site-verification" content="google04c850c6478b1f5a" />
 
@@ -63,7 +63,7 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Montserrat', sans-serif;
-      background-color: #111;
+      background-color: var(--bg-color);
     }
 
     :root {
@@ -405,40 +405,235 @@
       top: 5%;
       left: 20%;
       width: 300px;
-      height: 350px;
+      height: 300px;
     }
 
     .img-wrapper.seafood {
       top: 15%;
-      right: 0%;
-      width: 650px;
-      height: 400px;
+      left: 50% ;
+      width: 850px;
+      height: 850px;
     }
 
     .img-wrapper.bottom-texture {
       top: 40%;
-      left: 0%;
       width: 400px;
-      height: 250px;
+      height: 450px;
     }
 
     .img-wrapper.extra-one {
-      top: 55%;
-      right: 10%;
+      top: 85%;
+      right: 5%;
       width: 550px;
-      height: 700px;
+      height: 500px;
     }
 
     .img-wrapper.extra-two {
-      top: 85%;
-      left: 15%;
-      width: 350px;
-      height: 450px;
+      top: 95%;
+      width: 700px;
+      height: 760px;
     }
 
     .mobile-extra-caption {
       display: none;
     }
+
+    /* --- Section 3 Styles --- */
+    #section3 {
+      position: fixed;
+      top: 430vh;
+      left: 0;
+      width: 100vw;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      z-index: 2;
+      will-change: transform;
+      padding: 100px 60px 0 60px;
+    }
+
+    .sec3-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sec3-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.8vw;
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--text-dark);
+      letter-spacing: -1px;
+      margin-bottom: 40px;
+    }
+
+    .sec3-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .sec3-image {
+      width: 100%;
+      height: 65vh;
+      overflow: hidden;
+    }
+
+    .sec3-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* --- NEW Section 4 Styles (Menu Accordion) --- */
+    #section4 {
+      position: fixed;
+      top: 600vh;
+      left: 0;
+      width: 100vw;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      z-index: 2;
+      will-change: transform;
+      padding: 100px 60px 150px 60px;
+    }
+
+    .sec4-content {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      gap: 80px;
+    }
+
+    .sec4-left {
+      flex: 0 0 35%;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .sec4-intro {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      line-height: 1.8;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      max-width: 320px;
+    }
+
+    .sec4-images {
+      position: relative;
+      height: 450px;
+      width: 100%;
+    }
+
+    .sec4-images img {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .sec4-img1 {
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .sec4-img2 {
+      top: 120px;
+      left: 80px;
+      z-index: 2;
+    }
+
+    .sec4-right {
+      flex: 1;
+      padding-top: 10px;
+    }
+
+    .menu-accordion {
+      list-style: none;
+      width: 100%;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .accordion-item:first-child {
+      border-top: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      padding: 35px 0;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .accordion-header:hover .acc-title {
+      color: var(--accent-orange);
+    }
+
+    .acc-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--accent-orange);
+      width: 60px;
+    }
+
+    .acc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      flex-grow: 1;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+
+    .acc-action {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dark);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, padding 0.4s ease;
+      opacity: 0;
+      padding: 0 50px 0 60px;
+    }
+
+    .accordion-item.active .accordion-content {
+      opacity: 1;
+      padding-bottom: 40px;
+    }
+
+    .accordion-content p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: #444;
+      max-width: 600px;
+    }
+
 
     /* --- REVISED Mobile Media Queries --- */
     @media (max-width: 768px) {
@@ -477,6 +672,73 @@
         transform: none !important;
         z-index: 3 !important;
         background-color: var(--bg-color) !important;
+      }
+
+      /* Mobile overrides for Section 3 */
+      #section3 {
+        position: relative !important;
+        top: 0 !important;
+        height: auto !important;
+        padding: 40px 20px !important;
+        transform: none !important;
+        z-index: 3 !important;
+      }
+
+      /* Mobile overrides for Section 4 */
+      #section4 {
+        position: relative !important;
+        top: 0 !important;
+        height: auto !important;
+        padding: 40px 20px 120px 20px !important;
+        transform: none !important;
+        z-index: 3 !important;
+      }
+
+      .sec4-content {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .sec4-left {
+        width: 100%;
+        text-align: left;
+      }
+
+      .sec4-intro {
+        max-width: 100%;
+      }
+
+      .sec4-images {
+        display: none; /* Hidden on mobile to keep focus on the elegant menu accordion */
+      }
+
+      .accordion-header {
+        padding: 25px 0;
+      }
+
+      .acc-num {
+        width: 40px;
+      }
+
+      .acc-title {
+        font-size: 1.6rem;
+      }
+
+      .acc-action {
+        display: none; /* Hidden on mobile for a cleaner look */
+      }
+
+      .accordion-content {
+        padding: 0 10px 0 40px;
+      }
+
+      .sec3-heading {
+        font-size: 9vw;
+        margin-bottom: 30px;
+      }
+
+      .sec3-image {
+        height: 40vh;
       }
 
       header.glass-active {
@@ -585,6 +847,25 @@
       }
     }
 
+    /* Style for the link inside the expanded content */
+    .acc-view-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-orange);
+      padding-bottom: 2px;
+      transition: opacity 0.3s ease;
+    }
+
+    .acc-view-link:hover {
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
@@ -676,6 +957,143 @@
   </div>
 </div>
 
+
+<div id="section3">
+  <div class="sec2-header-wrap">
+    <span class="sec2-label">(ABOUT US)</span>
+    <h2 class="sec2-title">FUSION OF TRADITION AND CREATIVITY</h2>
+  </div>
+  <br>
+  <br>
+  <br>
+
+  <div class="sec3-content">
+    <h2 class="sec3-heading">
+      Feldman Architects are dedicated to creating buildings that sit gracefully and lightly on the earth. Beautiful, healthful, and soulful spaces that enhance our clients lives, our communities, and the environment around them.
+    </h2>
+    <div class="sec3-meta">
+      <span>Sonoma Valley, California</span>
+      <span>Completed 2021</span>
+    </div>
+    <div class="sec3-image">
+      <img src="/img/image-Picsart-AiImageEnhancer (7).png" alt="Modern Architecture">
+    </div>
+  </div>
+</div>
+
+<div id="section4">
+  <div class="sec2-header-wrap">
+    <span class="sec2-label">(OUR MENU)</span>
+    <h2 class="sec2-title">A TASTE OF TRADITION</h2>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class="sec4-content">
+
+    <div class="sec4-left">
+      <p class="sec4-intro">Explore our menus, perfect for all occasions, with dishes that celebrate the traditional portuguese gastronomy to plant-based options.</p>
+      <div class="sec4-images">
+        <img src="/img/FoodSection2.jpg" alt="Menu Preview 1" class="sec4-img1">
+        <img src="/img/Drink Section2.jpg" alt="Menu Preview 2" class="sec4-img2">
+      </div>
+    </div>
+
+    <div class="sec4-right">
+      <ul class="menu-accordion">
+
+        <li class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-num">(00)</span>
+            <h3 class="acc-title">VV BRUNCH</h3>
+            <span class="acc-action">VIEW MENU</span>
+          </div>
+          <div class="accordion-content">
+            <p>Delight in our exquisite morning selections featuring freshly baked pastries, artisanal cheeses, and rich Portuguese coffee designed to start your day beautifully.</p>
+            <a href="#" class="acc-view-link">VIEW MENU</a>
+          </div>
+        </li>
+
+        <li class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-num">(02)</span>
+            <h3 class="acc-title">BUBBLY BRUNCH </h3>
+            <span class="acc-action">VIEW MENU</span>
+          </div>
+          <div class="accordion-content">
+            <p>Elevate your brunch experience with premium champagne pairings, gourmet delicacies, and a selection of fresh ocean catches curated by our executive chef.</p>
+            <a href="#" class="acc-view-link">VIEW MENU</a>
+          </div>
+        </li>
+
+        <li class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-num">(03)</span>
+            <h3 class="acc-title">EXECUTIVE</h3>
+            <span class="acc-action">VIEW MENU</span>
+          </div>
+          <div class="accordion-content">
+            <p>A refined lunch selection perfectly paced for business meetings and midday indulgences, highlighting seasonal ingredients and sophisticated flavors.</p>
+            <a href="#" class="acc-view-link">VIEW MENU</a>
+          </div>
+        </li>
+
+        <li class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-num">(04)</span>
+            <h3 class="acc-title">LUNCH</h3>
+            <span class="acc-action">VIEW MENU</span>
+          </div>
+          <div class="accordion-content">
+            <p>A casually elegant midday affair featuring traditional Portuguese staples re-imagined with modern culinary techniques and plant-based alternatives.</p>
+            <a href="#" class="acc-view-link">VIEW MENU</a>
+          </div>
+        </li>
+
+        <li class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-num">(05)</span>
+            <h3 class="acc-title">DINNER</h3>
+            <span class="acc-action">VIEW MENU</span>
+          </div>
+          <div class="accordion-content">
+            <p>Experience the culmination of our culinary artistry. A romantic and immersive dinner service featuring bold flavors, fine wines, and exceptional hospitality.</p>
+            <a href="#" class="acc-view-link">VIEW MENU</a>
+          </div>
+        </li>
+
+        <li class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-num">(06)</span>
+            <h3 class="acc-title">LATE NIGHT SNACKS</h3>
+            <span class="acc-action">VIEW MENU</span>
+          </div>
+          <div class="accordion-content">
+            <p>Perfectly portioned artisanal bites designed to complement your late-night conversations and our signature cocktails.</p>
+            <a href="#" class="acc-view-link">VIEW MENU</a>
+          </div>
+        </li>
+
+        <li class="accordion-item">
+          <div class="accordion-header">
+            <span class="acc-num">(07)</span>
+            <h3 class="acc-title">BAR</h3>
+            <span class="acc-action">VIEW MENU</span>
+          </div>
+          <div class="accordion-content">
+            <p>Discover our extensive collection of fine wines, craft beers, and innovative cocktails prepared by our master mixologists.</p>
+            <a href="#" class="acc-view-link">VIEW MENU</a>
+            <br>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</div>
 <script>
   const panel = document.getElementById('scrollPanel');
   const header = document.getElementById('mainHeader');
@@ -686,6 +1104,32 @@
 
   const fixedBg = document.getElementById('fixedBg');
   const section2 = document.getElementById('section2');
+  const section3 = document.getElementById('section3');
+  const section4 = document.getElementById('section4'); // Added Section 4 reference
+
+  // Accordion Logic
+  const accordionItems = document.querySelectorAll('.accordion-item');
+
+  accordionItems.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    header.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+
+      // Close all other accordions smoothly
+      accordionItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        const otherContent = otherItem.querySelector('.accordion-content');
+        otherContent.style.maxHeight = null;
+      });
+
+      // Open the clicked one
+      if (!isActive) {
+        item.classList.add('active');
+        const content = item.querySelector('.accordion-content');
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  });
 
   function updateClock() {
     const timeEl = document.getElementById('liveTime');
@@ -752,19 +1196,9 @@
     clampTarget();
   }, { passive: true });
 
-  function clampTarget() {
-    const headerHeight = 100;
-    const panelHeight = (window.innerHeight * 0.75) - headerHeight;
-    const section2Height = window.innerHeight * 2.2;
-    const maxScroll = panelHeight + section2Height;
-    if (targetY > 0) targetY = 0;
-    if (targetY < -maxScroll) targetY = -maxScroll;
-  }
-
   function animateScroll() {
     const headerHeight = 100;
     const panelHeight = (window.innerHeight * 0.75) - headerHeight;
-    const section2Height = window.innerHeight * 2.2;
 
     const hasReachedParallax = currentY <= -panelHeight;
 
@@ -783,8 +1217,12 @@
     if (currentY < -panelHeight) {
       bgScrollY = currentY + panelHeight;
     }
+
+    // Apply transform logic to all fixed sections
     fixedBg.style.transform = `translateY(${bgScrollY}px)`;
     section2.style.transform = `translateY(${bgScrollY}px)`;
+    section3.style.transform = `translateY(${bgScrollY}px)`;
+    section4.style.transform = `translateY(${bgScrollY}px)`; // Connect section 4 to the scroll logic
 
     bookBtn.style.transform = `translateY(${-bgScrollY}px)`;
 
@@ -808,16 +1246,19 @@
 
   animateScroll();
 
-  window.addEventListener('resize', () => {
-    clampTarget();
+  function clampTarget() {
     const headerHeight = 100;
     const panelHeight = (window.innerHeight * 0.75) - headerHeight;
-    const section2Height = window.innerHeight * 2.2;
-    const maxScroll = panelHeight + section2Height;
-    if (targetY < -maxScroll) {
-      targetY = -maxScroll;
-    }
-  });
+    const section2Height = window.innerHeight * 3.0;
+
+    // Increased this buffer heavily to ensure we have room to scroll past Section 3 and fully down to the bottom of Section 4 (even if menus expand)
+    const extraScrollBuffer = 7500;
+
+    const maxScroll = panelHeight + section2Height + extraScrollBuffer;
+
+    if (targetY > 0) targetY = 0;
+    if (targetY < -maxScroll) targetY = -maxScroll;
+  }
 </script>
 </body>
 </html>
