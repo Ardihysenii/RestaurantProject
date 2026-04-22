@@ -441,7 +441,7 @@
     /* --- Section 3 Styles --- */
     #section3 {
       position: fixed;
-      top: 430vh;
+      top: 440vh;
       left: 0;
       width: 100vw;
       min-height: 100vh;
@@ -866,6 +866,154 @@
     .acc-view-link:hover {
       opacity: 0.7;
     }
+
+
+
+
+
+
+
+    /* --- Custom Palette Section Styles --- */
+    /* =========================================
+       SECTION 5 SCOPED STYLES
+    ========================================= */
+    #ca-exclusive-section {
+      background-color: #f1f1e6; /* Off-white from image */
+      color: #1a1a1a;
+      padding-bottom: 100px;
+      overflow: hidden;
+    }
+
+    /* LOOPING HEADER */
+    #ca-exclusive-section .ca-marquee {
+      width: 100%;
+      overflow: hidden;
+      padding: 30px 0;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    #ca-exclusive-section .ca-marquee-inner {
+      display: flex;
+      width: max-content;
+      animation: ca-scroll 25s linear infinite;
+    }
+
+    #ca-exclusive-section .ca-marquee-inner span {
+      font-family: serif; /* Matches "CULTURAL AGENDA" style */
+      font-size: 6rem;
+      text-transform: uppercase;
+      font-weight: 300;
+      white-space: nowrap;
+    }
+
+    @keyframes ca-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* CONTAINER & ROWS */
+    #ca-exclusive-section .ca-container {
+      max-width: 100%;
+      padding: 0 40px;
+    }
+
+    #ca-exclusive-section .ca-divider {
+      border: none;
+      border-top: 1px solid #333;
+      margin: 0;
+      opacity: 0.8;
+    }
+
+    #ca-exclusive-section .ca-row {
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+    }
+
+    #ca-exclusive-section .ca-content {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0 60px 0; /* THE 8px GAP BETWEEN HR AND TEXT */
+    }
+
+    #ca-exclusive-section .ca-text-box {
+      width: 45%;
+    }
+
+    #ca-exclusive-section .ca-date {
+      color: #c98236; /* Orange/Tan color from image */
+      font-size: 0.75rem;
+      font-family: sans-serif;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    #ca-exclusive-section .ca-title {
+      font-family: sans-serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.4;
+      text-transform: uppercase;
+      max-width: 450px;
+    }
+
+    #ca-exclusive-section .ca-image-box {
+      width: 40%;
+      height: 450px;
+      overflow: hidden;
+    }
+
+    #ca-exclusive-section .ca-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* SCROLL EFFECT CLASS */
+    #ca-exclusive-section .ca-row.is-scrolled {
+      transform: translateY(-40px); /* Rows "close together" as you scroll */
+    }
+
+    /* UPDATED MOBILE RESPONSIVENESS */
+    @media (max-width: 768px) {
+      /* Reduce side padding so content isn't "squeezed" */
+      #ca-exclusive-section .ca-container {
+        padding: 0 15px;
+      }
+
+      /* Stack text and image */
+      #ca-exclusive-section .ca-content {
+        flex-direction: column;
+        padding: 8px 0 40px 0; /* Reduced bottom padding for mobile */
+      }
+
+      #ca-exclusive-section .ca-text-box,
+      #ca-exclusive-section .ca-image-box {
+        width: 100%;
+      }
+
+      /* Make the title slightly larger on mobile to fill the width */
+      #ca-exclusive-section .ca-title {
+        font-size: 1.3rem;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+
+      /* Shrink the massive looping header so it doesn't overwhelm the screen */
+      #ca-exclusive-section .ca-marquee-inner span {
+        font-size: 3rem;
+      }
+
+      /* Adjust image height for better mobile proportions */
+      #ca-exclusive-section .ca-image-box {
+        height: auto;
+        aspect-ratio: 4 / 3; /* Keeps the image looking natural */
+        margin-top: 10px;
+      }
+
+      /* Disable or soften the scroll animation for mobile to prevent jitter */
+      #ca-exclusive-section .ca-row.is-scrolled {
+        transform: translateY(-10px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -931,7 +1079,7 @@
       </div>
 
       <div class="img-wrapper seafood">
-        <img src="/img/FoodSection2.jpg" alt="Seafood">
+        <img src="/img/asa.jpg" alt="Seafood">
         <div class="img-caption">
           Freshly sourced ingredients from the local Portuguese coast.
           <span class="mobile-extra-caption"> Carefully selected to bring you the authentic taste of the ocean directly to your table, ensuring every bite is memorable.</span>
@@ -939,11 +1087,11 @@
       </div>
 
       <div class="img-wrapper bottom-texture">
-        <img src="/img/Food2section2.jpg" alt="Texture">
+        <img src="/img/jghhjg.jpg" alt="Texture">
       </div>
 
       <div class="img-wrapper extra-one">
-        <img src="/img/RestaurantEntry.jpg" alt="Interior">
+        <img src="/img/PANCAKE.jpg" alt="Interior">
         <div class="img-caption">
           An atmosphere designed for comfort and creative dialogue.
           <span class="mobile-extra-caption"> Whether you are here for a quick bite or a long evening of fine dining, our space perfectly adapts to your every need.</span>
@@ -951,7 +1099,10 @@
       </div>
 
       <div class="img-wrapper extra-two">
-        <img src="https://images.unsplash.com/photo-1590846406792-0adc7f938f1d?q=80&w=1970&auto=format&fit=crop" alt="Chef Detail">
+        <img src="/img/FoodSection2.jpg" alt="Chef Detail">
+        <div class="img-caption">
+          Freshly sourced ingredients from the local Portuguese coast.
+        </div>
       </div>
     </div>
   </div>
@@ -961,7 +1112,7 @@
 <div id="section3">
   <div class="sec2-header-wrap">
     <span class="sec2-label">(ABOUT US)</span>
-    <h2 class="sec2-title">FUSION OF TRADITION AND CREATIVITY</h2>
+    <h2 class="sec2-title">FUSION OF TRADITION</h2>
   </div>
   <br>
   <br>
@@ -976,7 +1127,7 @@
       <span>Completed 2021</span>
     </div>
     <div class="sec3-image">
-      <img src="/img/image-Picsart-AiImageEnhancer (7).png" alt="Modern Architecture">
+      <img src="/img/b3464e0d-5014-43ba-9d18-9f1232bd3f93-Picsart-AiImageEnhancer-Picsart-AiImageEnhancer.jpg" alt="Modern Architecture">
     </div>
   </div>
 </div>
@@ -996,8 +1147,7 @@
     <div class="sec4-left">
       <p class="sec4-intro">Explore our menus, perfect for all occasions, with dishes that celebrate the traditional portuguese gastronomy to plant-based options.</p>
       <div class="sec4-images">
-        <img src="/img/FoodSection2.jpg" alt="Menu Preview 1" class="sec4-img1">
-        <img src="/img/Drink Section2.jpg" alt="Menu Preview 2" class="sec4-img2">
+        <img src="/img/erte.jpg" alt="Menu Preview 1" class="sec4-img1">
       </div>
     </div>
 
@@ -1092,8 +1242,88 @@
       </ul>
     </div>
 
+
   </div>
+  <br>
+  <br>
+  <section id="ca-exclusive-section">
+    <div class="ca-marquee">
+      <div class="ca-marquee-inner">
+        <span>CULTURAL AGENDA &bull; CULTURAL AGENDA &bull; CULTURAL AGENDA &bull;&nbsp;</span>
+        <span>CULTURAL AGENDA &bull; CULTURAL AGENDA &bull; CULTURAL AGENDA &bull;&nbsp;</span>
+      </div>
+    </div>
+
+    <div class="ca-container">
+      <div class="ca-row">
+        <hr class="ca-divider">
+        <div class="ca-content">
+          <div class="ca-text-box">
+            <p class="ca-date">(May 3, 2026 - May 3, 2026)</p>
+            <h3 class="ca-title">BUBBLY BRUNCH W/VEUVE CLICQUOT MOTHERS DAY EDITION</h3>
+          </div>
+          <div class="ca-image-box">
+            <img src="/img/Soup.jpg" alt="Brunch 1">
+          </div>
+        </div>
+      </div>
+
+      <div class="ca-row">
+        <hr class="ca-divider">
+        <div class="ca-content">
+          <div class="ca-text-box">
+            <p class="ca-date">(May 10, 2026 - May 10, 2026)</p>
+            <h3 class="ca-title">LIVE JAZZ & COCKTAIL SOIREE AT THE GARDEN</h3>
+          </div>
+          <div class="ca-image-box">
+            <img src="/img/Same.jpg" alt="Event 2">
+          </div>
+        </div>
+      </div>
+
+      <div class="ca-row">
+        <hr class="ca-divider">
+        <div class="ca-content">
+          <div class="ca-text-box">
+            <p class="ca-date">(May 17, 2026 - May 17, 2026)</p>
+            <h3 class="ca-title">ARTISAN PASTRY WORKSHOP WITH CHEF GIOVANNI</h3>
+          </div>
+          <div class="ca-image-box">
+            <img src="/img/soupe.jpg" alt="Event 3">
+          </div>
+        </div>
+      </div>
+
+      <div class="ca-row">
+        <hr class="ca-divider">
+        <div class="ca-content">
+          <div class="ca-text-box">
+            <p class="ca-date">(May 24, 2026 - May 24, 2026)</p>
+            <h3 class="ca-title">ROOFTOP WINE TASTING & SUNSET DINNER</h3>
+          </div>
+          <div class="ca-image-box">
+            <img src="/img/Soupee.jpg" alt="Event 4">
+          </div>
+        </div>
+      </div>
+
+      <div class="ca-row">
+        <hr class="ca-divider">
+        <div class="ca-content">
+          <div class="ca-text-box">
+            <p class="ca-date">(May 31, 2026 - May 31, 2026)</p>
+            <h3 class="ca-title">EXCLUSIVE SUMMER LAUNCH PARTY</h3>
+          </div>
+          <div class="ca-image-box">
+            <img src="/img/katnallss.jpg" alt="Event 5">
+          </div>
+        </div>
+      </div>
+
+      <hr class="ca-divider"> </div>
+  </section>
 </div>
+
 <script>
   const panel = document.getElementById('scrollPanel');
   const header = document.getElementById('mainHeader');
@@ -1259,6 +1489,24 @@
     if (targetY > 0) targetY = 0;
     if (targetY < -maxScroll) targetY = -maxScroll;
   }
+
+
+
+  // --- SCROLL ANIMATION LOGIC ---
+  window.addEventListener('scroll', () => {
+    const rows = document.querySelectorAll('#ca-exclusive-section .ca-row');
+
+    rows.forEach(row => {
+      const rect = row.getBoundingClientRect();
+      const triggerPoint = window.innerHeight * 0.8; // Triggers when 80% down the screen
+
+      if (rect.top < triggerPoint) {
+        row.classList.add('is-scrolled');
+      } else {
+        row.classList.remove('is-scrolled');
+      }
+    });
+  });
 </script>
 </body>
 </html>
