@@ -1014,6 +1014,118 @@
         transform: translateY(-10px);
       }
     }
+
+
+
+
+
+
+
+
+
+
+    /* =========================================
+   FOOTER STYLES
+========================================= */
+    .ora-footer {
+      position: relative;
+      z-index: 10;
+      background-color: #111111;
+      color: var(--bg-color);
+      padding: 100px 60px 40px 60px;
+      margin-top: 100vh; /* Adjust based on your scroll layout */
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 80px;
+      border-bottom: 1px solid rgba(243, 242, 235, 0.2);
+    }
+
+    .footer-brand .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 10px;
+      color: var(--bg-color);
+    }
+
+    .footer-brand .footer-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--accent-orange);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 80px;
+    }
+
+    .footer-column h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--accent-orange);
+      margin-bottom: 20px;
+    }
+
+    .footer-column p, .footer-column a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: rgba(243, 242, 235, 0.7);
+      text-decoration: none;
+      display: block;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--accent-orange);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      color: rgba(243, 242, 235, 0.5);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .ora-footer { padding: 60px 20px 30px 20px; }
+      .footer-top { flex-direction: column; gap: 50px; }
+      .footer-links { flex-direction: column; gap: 40px; }
+      .footer-brand .footer-logo { font-size: 3.5rem; }
+      .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+    }
+    /* =========================================
+   ENTERPRISE ANIMATION STATES
+========================================= */
+    /* Silent Animation Logic */
+    [data-animate="true"] {
+      clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+      transform: scale(1.1);
+      opacity: 0;
+      transition: clip-path 1.5s cubic-bezier(0.77, 0, 0.175, 1),
+      transform 1.5s cubic-bezier(0.77, 0, 0.175, 1),
+      opacity 0.5s ease;
+      will-change: clip-path, transform;
+    }
+
+    [data-animate="true"].is-inview {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      transform: scale(1);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -1324,6 +1436,34 @@
   </section>
 </div>
 
+<footer class="ora-footer observe-section">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2 class="footer-logo animate-text-letters">ORA</h2>
+      <p class="footer-tagline">RESTAURANT & BAR</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h4>VISIT</h4>
+        <p>Rruga e Dëshmorëve<br>Podujevë, Kosovo</p>
+      </div>
+      <div class="footer-column">
+        <h4>CONTACT</h4>
+        <p>info@restaurantora.com<br>+383 44 000 000</p>
+      </div>
+      <div class="footer-column">
+        <h4>SOCIAL</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Ora Restaurant & Bar. All rights reserved.</p>
+    <p>Design by Ardi Hyseni</p>
+  </div>
+</footer>
+
 <script>
   const panel = document.getElementById('scrollPanel');
   const header = document.getElementById('mainHeader');
@@ -1411,12 +1551,12 @@
   window.addEventListener('wheel', (e) => {
     targetY -= (e.deltaY * scrollSpeedMultiplier);
     clampTarget();
-  }, { passive: false });
+  }, {passive: false});
 
   let touchStartY = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
-  }, { passive: true });
+  }, {passive: true});
 
   window.addEventListener('touchmove', (e) => {
     const touchDelta = touchStartY - e.touches[0].clientY;
@@ -1424,7 +1564,7 @@
     targetY -= (touchDelta * scrollSpeedMultiplier * touchMultiplier);
     touchStartY = e.touches[0].clientY;
     clampTarget();
-  }, { passive: true });
+  }, {passive: true});
 
   function animateScroll() {
     const headerHeight = 100;
@@ -1491,7 +1631,6 @@
   }
 
 
-
   // --- SCROLL ANIMATION LOGIC ---
   window.addEventListener('scroll', () => {
     const rows = document.querySelectorAll('#ca-exclusive-section .ca-row');
@@ -1507,6 +1646,120 @@
       }
     });
   });
+
+
+  (function () {
+    const initSilentReveal = () => {
+      // 1. Grab every image on the site
+      const allImages = document.querySelectorAll('img');
+
+      allImages.forEach(img => {
+        // 2. Only target images that have "-reveal" in their file source
+        if (img.src.includes('-reveal')) {
+          img.setAttribute('data-animate', 'true');
+          observer.observe(img);
+        }
+      });
+    };
+
+    // 3. The Observer that triggers the "Whoop-less" smooth reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-inview');
+        }
+      });
+    }, {threshold: 0.1});
+
+    // Run on load
+    window.addEventListener('load', initSilentReveal);
+  })();
+
+
+
+
+  (function() {
+    const initAnimations = () => {
+      // --- TARGETS ---
+      const textElements = document.querySelectorAll('.hero-title, .sec2-title, .sec3-heading');
+      const imageElements = document.querySelectorAll('.img-wrapper, .sec4-images img');
+
+      // --- 1. PREPARE TEXT (Letter-by-Letter) ---
+      textElements.forEach(el => {
+        const originalText = el.innerText;
+        el.innerHTML = ''; // Clear original text
+        el.style.opacity = "1"; // Ensure container stays visible
+
+        // Rebuild text as spans for individual control
+        [...originalText].forEach((char, i) => {
+          const span = document.createElement('span');
+          // Preserve spaces as non-breaking to prevent layout collapse
+          span.textContent = char === ' ' ? '\u00A0' : char;
+
+          // Pure JS Styling - No CSS file needed
+          Object.assign(span.style, {
+            display: 'inline-block',
+            opacity: '0',
+            transform: 'translateY(15px)',
+            transition: 'opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+            transitionDelay: `${i * 0.03}s`, // The staggered delay
+            pointerEvents: 'none'
+          });
+          el.appendChild(span);
+        });
+      });
+
+      // --- 2. PREPARE IMAGES (Staggered Entry) ---
+      imageElements.forEach((img) => {
+        // Force hardware acceleration for smoothness
+        Object.assign(img.style, {
+          opacity: '0',
+          transform: 'translateY(30px) scale(0.98)',
+          transition: 'opacity 1.2s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)',
+          willChange: 'transform, opacity'
+        });
+      });
+
+      // --- 3. REVEAL LOGIC (Intersection Observer) ---
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+
+            // If it's a text block, trigger all letters inside
+            if (target.children.length > 0 && target.children[0].tagName === 'SPAN') {
+              Array.from(target.children).forEach(span => {
+                span.style.opacity = '1';
+                span.style.transform = 'translateY(0)';
+              });
+            }
+            // If it's an image or image wrapper
+            else {
+              // Apply one-by-one delay based on current view index
+              target.style.opacity = '1';
+              target.style.transform = 'translateY(0) scale(1)';
+            }
+            revealObserver.unobserve(target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      // Start observing
+      textElements.forEach(el => revealObserver.observe(el));
+      imageElements.forEach((img, idx) => {
+        // Assign staggered delay to images within the same section
+        img.style.transitionDelay = `${(idx % 4) * 0.15}s`;
+        revealObserver.observe(img);
+      });
+    };
+
+    // Run on load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAnimations);
+    } else {
+      initAnimations();
+    }
+  })();
 </script>
 </body>
 </html>
