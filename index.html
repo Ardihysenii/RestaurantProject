@@ -1110,22 +1110,7 @@
     /* =========================================
    ENTERPRISE ANIMATION STATES
 ========================================= */
-    /* Silent Animation Logic */
-    [data-animate="true"] {
-      clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-      transform: scale(1.1);
-      opacity: 0;
-      transition: clip-path 1.5s cubic-bezier(0.77, 0, 0.175, 1),
-      transform 1.5s cubic-bezier(0.77, 0, 0.175, 1),
-      opacity 0.5s ease;
-      will-change: clip-path, transform;
-    }
 
-    [data-animate="true"].is-inview {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-      transform: scale(1);
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
@@ -1169,8 +1154,8 @@
 <div class="foreground-panel" id="scrollPanel">
   <main>
     <h2 class="hero-title">
-      VISEVERSA —<br>
-      PORTUGUESE <span class="highlight">BISTRO</span>
+      RESTAURANT —<br>
+      KOSOVAR <span class="highlight">ORA</span>
     </h2>
     <div class="subtext">
       <p>At Viseversa, tradition and innovation come together for a unique gastronomic experience in a cosy and elegant atmosphere.</p>
@@ -1681,37 +1666,61 @@
   (function() {
     const initAnimations = () => {
       // --- TARGETS ---
-      const textElements = document.querySelectorAll('.hero-title, .sec2-title, .sec3-heading');
+      const textElements = document.querySelectorAll('.hero-title, .sec2-title, .sec3-heading, .subtext');
       const imageElements = document.querySelectorAll('.img-wrapper, .sec4-images img');
 
-      // --- 1. PREPARE TEXT (Letter-by-Letter) ---
+      // --- 1. PREPARE TEXT (Letter-by-Letter, Protected Layout) ---
       textElements.forEach(el => {
-        const originalText = el.innerText;
+        // Get the text, but trim trailing spaces to prevent layout shifts
+        const originalText = el.innerText.trim();
+        if (!originalText) return; // Skip if empty
+
         el.innerHTML = ''; // Clear original text
-        el.style.opacity = "1"; // Ensure container stays visible
+        el.style.opacity = "1"; // Ensure parent stays visible
 
-        // Rebuild text as spans for individual control
-        [...originalText].forEach((char, i) => {
-          const span = document.createElement('span');
-          // Preserve spaces as non-breaking to prevent layout collapse
-          span.textContent = char === ' ' ? '\u00A0' : char;
+        let charIndex = 0; // Global counter for seamless stagger delay
 
-          // Pure JS Styling - No CSS file needed
-          Object.assign(span.style, {
-            display: 'inline-block',
-            opacity: '0',
-            transform: 'translateY(15px)',
-            transition: 'opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
-            transitionDelay: `${i * 0.03}s`, // The staggered delay
-            pointerEvents: 'none'
+        // Split text by words first
+        const words = originalText.split(/\s+/);
+
+        words.forEach((word, wordIdx) => {
+          // Create a protective container for the WORD
+          // This stops letters from breaking to the next line mid-word
+          const wordContainer = document.createElement('span');
+          wordContainer.style.display = 'inline-block';
+          wordContainer.style.whiteSpace = 'nowrap'; // Force word to stay together
+
+          // Now split the word into letters
+          [...word].forEach(char => {
+            const charSpan = document.createElement('span');
+            charSpan.textContent = char;
+
+            // Apply your exact animations to the character
+            Object.assign(charSpan.style, {
+              display: 'inline-block',
+              opacity: '0',
+              transform: 'translateY(15px)',
+              transition: 'opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+              transitionDelay: `${charIndex * 0.03}s`,
+              pointerEvents: 'none'
+            });
+
+            wordContainer.appendChild(charSpan);
+            charIndex++;
           });
-          el.appendChild(span);
+
+          el.appendChild(wordContainer);
+
+          // Add a standard space node after the word (except the last word)
+          // This preserves your exact CSS word-spacing and layout
+          if (wordIdx < words.length - 1) {
+            el.appendChild(document.createTextNode(' '));
+          }
         });
       });
 
       // --- 2. PREPARE IMAGES (Staggered Entry) ---
       imageElements.forEach((img) => {
-        // Force hardware acceleration for smoothness
         Object.assign(img.style, {
           opacity: '0',
           transform: 'translateY(30px) scale(0.98)',
@@ -1726,19 +1735,21 @@
           if (entry.isIntersecting) {
             const target = entry.target;
 
-            // If it's a text block, trigger all letters inside
-            if (target.children.length > 0 && target.children[0].tagName === 'SPAN') {
-              Array.from(target.children).forEach(span => {
+            // Find the animated letter spans inside the word containers
+            const animatedLetters = target.querySelectorAll('span > span');
+
+            if (animatedLetters.length > 0) {
+              // It's a text element: trigger letters
+              animatedLetters.forEach(span => {
                 span.style.opacity = '1';
                 span.style.transform = 'translateY(0)';
               });
-            }
-            // If it's an image or image wrapper
-            else {
-              // Apply one-by-one delay based on current view index
+            } else {
+              // It's an image element: trigger image
               target.style.opacity = '1';
               target.style.transform = 'translateY(0) scale(1)';
             }
+
             revealObserver.unobserve(target);
           }
         });
@@ -1747,7 +1758,6 @@
       // Start observing
       textElements.forEach(el => revealObserver.observe(el));
       imageElements.forEach((img, idx) => {
-        // Assign staggered delay to images within the same section
         img.style.transitionDelay = `${(idx % 4) * 0.15}s`;
         revealObserver.observe(img);
       });
