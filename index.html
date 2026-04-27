@@ -1155,7 +1155,7 @@
   <main>
     <h2 class="hero-title">
       VISEVERSA — <br>
-      KOSOVAR <span class="highlight">ORA</span>
+      KOSOVARE <span class="highlight">ORA</span>
     </h2>
     <div class="subtext">
       <p>At Viseversa, tradition and innovation come together for a unique gastronomic experience in a cosy and elegant atmosphere.</p>
@@ -1665,61 +1665,65 @@
 
   (function() {
     const initAnimations = () => {
-      // --- TARGETS ---
       const textElements = document.querySelectorAll('.hero-title, .sec2-title, .sec3-heading, .subtext');
       const imageElements = document.querySelectorAll('.img-wrapper, .sec4-images img');
 
-      // --- 1. PREPARE TEXT (Letter-by-Letter, Protected Layout) ---
-      textElements.forEach(el => {
-        // Get the text, but trim trailing spaces to prevent layout shifts
-        const originalText = el.innerText.trim();
-        if (!originalText) return; // Skip if empty
+      // --- 1. PREPARE TEXT (Structure-Preserving) ---
+      let globalCharIndex = 0;
 
-        el.innerHTML = ''; // Clear original text
-        el.style.opacity = "1"; // Ensure parent stays visible
+      const wrapTextNodes = (element) => {
+        const nodes = Array.from(element.childNodes);
 
-        let charIndex = 0; // Global counter for seamless stagger delay
+        nodes.forEach(node => {
+          if (node.nodeType === 3 && node.textContent.trim().length > 0) {
+            // It's a text node - wrap the letters
+            const frag = document.createDocumentFragment();
+            const words = node.textContent.split(/(\s+)/); // Keep spaces as their own array items
 
-        // Split text by words first
-        const words = originalText.split(/\s+/);
+            words.forEach(word => {
+              if (/\s+/.test(word)) {
+                // It's just whitespace, keep it as a raw text node
+                frag.appendChild(document.createTextNode(word));
+              } else {
+                // It's a word - wrap in a "no-wrap" container to protect layout
+                const wordWrap = document.createElement('span');
+                wordWrap.style.display = 'inline-block';
+                wordWrap.style.whiteSpace = 'nowrap';
 
-        words.forEach((word, wordIdx) => {
-          // Create a protective container for the WORD
-          // This stops letters from breaking to the next line mid-word
-          const wordContainer = document.createElement('span');
-          wordContainer.style.display = 'inline-block';
-          wordContainer.style.whiteSpace = 'nowrap'; // Force word to stay together
-
-          // Now split the word into letters
-          [...word].forEach(char => {
-            const charSpan = document.createElement('span');
-            charSpan.textContent = char;
-
-            // Apply your exact animations to the character
-            Object.assign(charSpan.style, {
-              display: 'inline-block',
-              opacity: '0',
-              transform: 'translateY(15px)',
-              transition: 'opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
-              transitionDelay: `${charIndex * 0.03}s`,
-              pointerEvents: 'none'
+                [...word].forEach(char => {
+                  const charSpan = document.createElement('span');
+                  charSpan.textContent = char;
+                  Object.assign(charSpan.style, {
+                    display: 'inline-block',
+                    opacity: '0',
+                    transform: 'translateY(15px)',
+                    transition: 'opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+                    transitionDelay: `${globalCharIndex * 0.03}s`,
+                    pointerEvents: 'none',
+                    verticalAlign: 'baseline' // FIX: Keeps text on the exact same baseline
+                  });
+                  wordWrap.appendChild(charSpan);
+                  globalCharIndex++;
+                });
+                frag.appendChild(wordWrap);
+              }
             });
-
-            wordContainer.appendChild(charSpan);
-            charIndex++;
-          });
-
-          el.appendChild(wordContainer);
-
-          // Add a standard space node after the word (except the last word)
-          // This preserves your exact CSS word-spacing and layout
-          if (wordIdx < words.length - 1) {
-            el.appendChild(document.createTextNode(' '));
+            element.replaceChild(frag, node);
+          } else if (node.nodeType === 1) {
+            // It's an element (like <strong> or <span style="color:red">)
+            // Recurse inside it to keep the colors/styles intact!
+            wrapTextNodes(node);
           }
         });
+      };
+
+      textElements.forEach(el => {
+        globalCharIndex = 0; // Reset stagger for each heading block
+        wrapTextNodes(el);
+        el.style.opacity = "1";
       });
 
-      // --- 2. PREPARE IMAGES (Staggered Entry) ---
+      // --- 2. PREPARE IMAGES ---
       imageElements.forEach((img) => {
         Object.assign(img.style, {
           opacity: '0',
@@ -1729,33 +1733,30 @@
         });
       });
 
-      // --- 3. REVEAL LOGIC (Intersection Observer) ---
+      // --- 3. REVEAL LOGIC ---
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const target = entry.target;
 
-            // Find the animated letter spans inside the word containers
-            const animatedLetters = target.querySelectorAll('span > span');
+            // Trigger all spans created for animation
+            const letters = target.querySelectorAll('span[style*="opacity: 0"]');
 
-            if (animatedLetters.length > 0) {
-              // It's a text element: trigger letters
-              animatedLetters.forEach(span => {
+            if (letters.length > 0) {
+              letters.forEach(span => {
                 span.style.opacity = '1';
                 span.style.transform = 'translateY(0)';
               });
             } else {
-              // It's an image element: trigger image
+              // Target is an image
               target.style.opacity = '1';
               target.style.transform = 'translateY(0) scale(1)';
             }
-
             revealObserver.unobserve(target);
           }
         });
       }, { threshold: 0.1 });
 
-      // Start observing
       textElements.forEach(el => revealObserver.observe(el));
       imageElements.forEach((img, idx) => {
         img.style.transitionDelay = `${(idx % 4) * 0.15}s`;
@@ -1763,7 +1764,6 @@
       });
     };
 
-    // Run on load
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initAnimations);
     } else {
